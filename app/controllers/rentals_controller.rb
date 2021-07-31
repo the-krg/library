@@ -1,27 +1,22 @@
 class RentalsController < ApplicationController
   before_action :set_rental, only: %i[ show edit update destroy ]
 
-  # GET /rentals or /rentals.json
   def index
     @rentals = Rental.all
   end
 
-  # GET /rentals/1 or /rentals/1.json
   def show
   end
 
-  # GET /rentals/new
   def new
     @rental = Rental.new
     @users = User.all
     @books = Book.available
   end
 
-  # GET /rentals/1/edit
   def edit
   end
 
-  # POST /rentals or /rentals.json
   def create
     @rental = Rental.new(rental_params)
     @rental.borrow_date = Date.today
@@ -38,7 +33,6 @@ class RentalsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /rentals/1 or /rentals/1.json
   def update
     respond_to do |format|
       if @rental.update(rental_params)
@@ -51,7 +45,6 @@ class RentalsController < ApplicationController
     end
   end
 
-  # DELETE /rentals/1 or /rentals/1.json
   def destroy
     @rental.destroy
     respond_to do |format|
@@ -61,12 +54,10 @@ class RentalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_rental
       @rental = Rental.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def rental_params
       params.require(:rental).permit(:book_id, :user_id, :borrow_date, :return_date, :returned)
     end
