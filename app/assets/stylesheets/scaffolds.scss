@@ -1,11 +1,16 @@
 body {
   background-color: #fff;
   color: #333;
-  margin: 33px; }
+  margin: 0; 
+
+  & > section {
+    margin: 2rem;
+  }
+}
 
 body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
+  font-family: 'Gentium Basic', serif;
+  font-size: 1rem;
   line-height: 18px; }
 
 pre {
