@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'home#index' 
   resources :rentals
   resources :books
   resources :users
