@@ -5,8 +5,10 @@ module HomeHelper
 
     if remaining_days > 0
       "#{remaining_days} day(s) until return"
-    else
+    elsif remaining_days < 0
       "#{remaining_days.abs} day(s) late"
+    else
+      "Returns today"
     end
   end
 
