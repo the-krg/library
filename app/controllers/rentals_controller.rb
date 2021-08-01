@@ -5,16 +5,14 @@ class RentalsController < ApplicationController
     @rentals = Rental.all
   end
 
-  def show
-  end
-
   def new
     @rental = Rental.new
-    @users = User.all
-    @books = Book.available
   end
 
-  def edit
+  def return
+  end
+
+  def postpone
   end
 
   def create
@@ -42,14 +40,6 @@ class RentalsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @rental.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def destroy
-    @rental.destroy
-    respond_to do |format|
-      format.html { redirect_to rentals_url, notice: "Rental was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
