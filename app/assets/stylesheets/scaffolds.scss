@@ -38,6 +38,40 @@ div.field,
 div.actions {
   margin-bottom: 10px; }
 
+table {
+  width: 100%;
+  text-align: left;
+
+  & > caption {
+    text-align: left;
+  }
+
+  & > thead {
+    background-color: #4f7878;
+    height: 3rem;
+    font-size: 1.2rem;
+    color: #fff;
+
+    & > tr > th {
+      padding: 1rem;
+    }
+  }
+
+  & > tbody {
+    & > tr > td {
+      padding: 1rem;
+    }
+  }
+
+  tr {
+    height: 2rem;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+}
+
 #notice {
   color: green; }
 
