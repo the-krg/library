@@ -21,4 +21,5 @@
 </p>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
+<%= link_to 'Destroy', @book, method: :delete, data: { confirm: 'Are you sure? This will delete all rent records for this book.' } %> |
 <%= link_to 'Back', books_path %>
