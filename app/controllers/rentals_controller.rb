@@ -1,5 +1,5 @@
 class RentalsController < ApplicationController
-  before_action :set_rental, only: %i[ update return postpone show ]
+  before_action :set_rental, only: %i[ return postpone show ]
 
   def index
     @rentals = Rental.all.order(return_date: :desc)
@@ -36,18 +36,6 @@ class RentalsController < ApplicationController
         format.json { render :show, status: :created, location: @rental }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @rental.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @rental.update(rental_params)
-        format.html { redirect_to @rental, notice: "Rental was successfully updated." }
-        format.json { render :show, status: :ok, location: @rental }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @rental.errors, status: :unprocessable_entity }
       end
     end

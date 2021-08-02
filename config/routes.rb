@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index' 
   
-  resources :rentals, only: %i(index new create update show)
+  resources :rentals, only: %i[ index new create show ]
   post 'rentals/:id/return', to: 'rentals#return', as: 'return_rental'
   post 'rentals/:id/postpone', to: 'rentals#postpone', as: 'postpone_rental'
 
