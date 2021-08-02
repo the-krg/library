@@ -4,4 +4,8 @@ module ApplicationHelper
 
     genre.present? ? genre.name : 'No favorite genre'
   end
+
+  def book_genres
+    BookGenre.all
+  end
 end
