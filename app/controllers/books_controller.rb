@@ -2,7 +2,9 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
   def index
-    @books = Book.all.order(available: :desc)
+    @books = Book.where(available: true)
+
+    @unavailable_books = Book.where(available: false)
   end
 
   def show
