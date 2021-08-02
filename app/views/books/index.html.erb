@@ -13,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @books.each do |book| %>
+    <% available_books.each do |book| %>
       <tr>
         <td><%= book.name %></td>
         <td><%= book.description %></td>
@@ -23,7 +23,7 @@
         <td><%= link_to 'Rent', new_rental_path(book_id: book.id) %></td>
       </tr>
     <% end %>
-    <% @unavailable_books.each do |book| %>
+    <% unavailable_books.each do |book| %>
       <tr class="unavailable">
         <td><%= book.name %></td>
         <td><%= book.description %></td>

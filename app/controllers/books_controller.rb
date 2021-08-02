@@ -2,9 +2,15 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
   def index
-    @books = Book.where(available: true)
+    books = Book.all.load
 
-    @unavailable_books = Book.where(available: false)
+    available = books.select { |b| b.available == true }
+    unavailable = books.select { |b| b.available == false }
+  
+    render locals: { 
+      available_books: available,
+      unavailable_books: unavailable,
+    }
   end
 
   def show
