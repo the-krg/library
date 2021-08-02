@@ -22,7 +22,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :book_genre_id %>
+    <%= form.label :book_genre_id, 'Favorite Book Genre' %>
     <%= form.select :book_genre_id, book_genres.collect { |genre| [genre.name, genre.id] } %>
   </div>
 

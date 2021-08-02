@@ -10,7 +10,6 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @book_genres = BookGenre.all
   end
 
   def edit
