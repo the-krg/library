@@ -61,6 +61,14 @@ table {
     & > tr > td {
       padding: 1rem;
     }
+
+    & > tr.warning {
+      background: rgb(255, 146, 146);
+    }
+
+    & > tr.alert {
+      background: rgb(254, 255, 198);
+    }
   }
 
   tr {

@@ -1,8 +1,11 @@
 class RentalsController < ApplicationController
-  before_action :set_rental, only: %i[ update return postpone ]
+  before_action :set_rental, only: %i[ update return postpone show ]
 
   def index
-    @rentals = Rental.all
+    @rentals = Rental.all.order(return_date: :desc)
+  end
+
+  def show
   end
 
   def new

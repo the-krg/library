@@ -13,7 +13,11 @@ module HomeHelper
   end
 
   def rental_status(return_date)
-    'warning' if remaining_days(return_date) < 0
+    if remaining_days(return_date) < 0
+      'warning' 
+    elsif remaining_days(return_date) == 0
+      'alert'
+    end
   end
 
   def books
