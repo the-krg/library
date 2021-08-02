@@ -1,5 +1,4 @@
 module HomeHelper
-
   def days_remaining(return_date)
     days_left = remaining_days(return_date)
 
