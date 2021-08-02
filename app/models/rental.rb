@@ -26,11 +26,11 @@ class Rental < ApplicationRecord
   end
 
   def disable_book
-    Book.find(book_id).update(available: false)
+    Book.find(book_id).update_column(:available, false)
   end
 
   def enable_book
-    Book.find(book_id).update(available: false)
+    Book.find(book_id).update(available: true)
   end
 
   def book_returned?

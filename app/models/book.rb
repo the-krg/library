@@ -9,7 +9,7 @@ class Book < ApplicationRecord
 
   def book_rented?
     if Rental.find_by(book_id: id, returned: false).present?
-      errors[:book] << 'Cannot delete a rented book. Please wait for it to return.'
+      errors.add(:book, 'Cannot delete or update a borrowed book. Please wait for it to return.')
 
       throw :abort
     end

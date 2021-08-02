@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_204421) do
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.boolean "available"
+    t.boolean "available", default: true
     t.bigint "book_genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_07_30_204421) do
     t.bigint "user_id", null: false
     t.date "borrow_date"
     t.date "return_date"
-    t.boolean "returned"
+    t.boolean "returned", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_rentals_on_book_id"
