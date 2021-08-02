@@ -1,6 +1,6 @@
 # Create some base Genres
 puts "Creating genres..."
-(30).times { BookGenre.create(name: Faker::Book.genre) }
+(10).times { BookGenre.create(name: Faker::Book.unique.genre) }
 
 puts "#{BookGenre.count} genres created!"
 # Create Users and Books
