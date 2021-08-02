@@ -1,11 +1,6 @@
 <h1>Hello there, <br/> <br/> welcome to the Old Library!</h1>
 <h3><%= link_to 'Rent new book', new_rental_path %></h3>
 <br/>
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
 <table>
   <caption>
     <h2>Current Borrowed Books:</h2>
