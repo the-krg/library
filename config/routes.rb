@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   root 'home#index' 
-  resources :rentals
+  
+  resources :rentals, only: %i(index new create update)
+  post 'rentals/:id/return', to: 'rentals#return', as: 'return_rental'
+  post 'rentals/:id/postpone', to: 'rentals#postpone', as: 'postpone_rental'
+
   resources :books
   resources :users
   resources :book_genres
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

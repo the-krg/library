@@ -1,15 +1,19 @@
 module HomeHelper
 
   def days_remaining(return_date)
-    remaining_days = (return_date.to_date - Date.today).to_i
+    days_left = remaining_days(return_date)
 
-    if remaining_days > 0
-      "#{remaining_days} day(s) until return"
-    elsif remaining_days < 0
-      "#{remaining_days.abs} day(s) late"
+    if days_left > 0
+      "#{days_left} day(s) until return"
+    elsif days_left < 0
+      "#{days_left.abs} day(s) late"
     else
       "Returns today"
     end
+  end
+
+  def rental_status(return_date)
+    'warning' if remaining_days(return_date) < 0
   end
 
   def books
@@ -18,5 +22,11 @@ module HomeHelper
 
   def users
     User.all
+  end
+
+  private
+
+  def remaining_days(return_date)
+    (return_date.to_date - Date.today).to_i
   end
 end

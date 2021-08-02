@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @rentals = Rental.borrowed
+    render locals: { rentals: Rental.borrowed }
   end
 end

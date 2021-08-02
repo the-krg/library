@@ -1,5 +1,5 @@
 class RentalsController < ApplicationController
-  before_action :set_rental, only: %i[ show edit update destroy ]
+  before_action :set_rental, only: %i[ update return postpone ]
 
   def index
     @rentals = Rental.all
@@ -10,6 +10,13 @@ class RentalsController < ApplicationController
   end
 
   def return
+    respond_to do |format|
+      if @rental.update(returned: true) && @rental.book.update(available: true)
+        format.json { render json: 'Successfully returned.', status: :ok }
+      else
+        format.json { render json: @rental.errors.full_messages.join(' - '), status: :unprocessable_entity }
+      end
+    end
   end
 
   def postpone
