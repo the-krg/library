@@ -69,6 +69,15 @@ table {
     & > tr.alert {
       background: rgb(254, 255, 198);
     }
+
+    & > tr.unavailable {
+      opacity: 0.7;
+      background: #efbec7;
+
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
   }
 
   tr {

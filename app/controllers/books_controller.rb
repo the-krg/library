@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
 
   def index
-    @books = Book.all
+    @books = Book.all.order(available: :desc)
   end
 
   def show
@@ -10,7 +10,6 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
-    @book_genres = BookGenre.all
   end
 
   def edit
@@ -43,10 +42,14 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.destroy
     respond_to do |format|
-      format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
-      format.json { head :no_content }
+      if @book.destroy
+        format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @book, notice: @book.errors.full_messages }
+        format.json { render json: @book.errors, status: :unprocessable_entity }
+      end
     end
   end
 
