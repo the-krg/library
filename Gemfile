@@ -16,6 +16,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'faker'
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'rexml', '~> 3.2', '>= 3.2.4'
 end
 
 group :development do
