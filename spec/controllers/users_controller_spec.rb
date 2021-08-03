@@ -31,13 +31,6 @@ describe UsersController, type: :controller do
     end
   end
 
-  describe '#show' do
-    it 'renders ok status' do
-      get :show, params: { id: user.id }
-      expect(response).to have_http_status(:ok)
-    end
-  end
-
   describe '#create' do
     let(:user_params) { build(:user).attributes }
 
