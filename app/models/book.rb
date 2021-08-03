@@ -4,7 +4,9 @@ class Book < ApplicationRecord
 
   scope :available, -> { where(available: true) }
 
-  before_destroy :book_rented?
+  validates :name, :description, :book_genre_id, presence: true
+
+  before_destroy :book_rented?, prepend: true
   before_update :book_rented?
 
   def book_rented?
