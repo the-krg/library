@@ -14,10 +14,10 @@ class RentalsController < ApplicationController
 
   def return
     respond_to do |format|
-      if @rental.update(returned: true) && @rental.book.update(available: true)
+      ActiveRecord::Base.transaction do
+        @rental.update_column(:returned, true)
+        @rental.book.update(available: true)
         format.json { render json: 'Successfully returned.', status: :ok }
-      else
-        format.json { render json: @rental.errors.full_messages.join(' - '), status: :unprocessable_entity }
       end
     end
   end
@@ -32,7 +32,7 @@ class RentalsController < ApplicationController
 
     respond_to do |format|
       if @rental.save
-        format.html { redirect_to @rental, notice: "Rental was successfully created." }
+        format.html { redirect_to @rental, status: :created, notice: "Rental was successfully created." }
         format.json { render :show, status: :created, location: @rental }
       else
         format.html { render :new, status: :unprocessable_entity }

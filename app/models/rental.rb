@@ -3,7 +3,7 @@ class Rental < ApplicationRecord
 
   validates :book_id, :user_id, :borrow_date, :return_date, presence: true
   validate :available_book?, unless: :book_returned?
-  validate :return_date_cannot_be_in_the_past
+  validate :return_date_cannot_be_in_the_past, if: -> { return_date.present? }
 
   after_create :disable_book
   after_update :enable_book, if: :book_returned?
