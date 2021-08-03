@@ -44,7 +44,7 @@ describe BooksController, type: :controller do
     end
 
     context 'with invalid book params' do
-      it 'renders created status' do
+      it 'renders unprocessable_entity status' do
         post :create, params: { book: book_params.except('name') }
 
         expect(response).to have_http_status(:unprocessable_entity)

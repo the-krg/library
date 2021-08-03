@@ -35,7 +35,6 @@ describe UsersController, type: :controller do
     let(:user_params) { build(:user).attributes }
 
     context 'with valid user params' do
-
       it 'renders created status' do
         post :create, params: { user: user_params }
 
@@ -44,7 +43,7 @@ describe UsersController, type: :controller do
     end
 
     context 'with invalid user params' do
-      it 'renders created status' do
+      it 'renders unprocessable_entity status' do
         post :create, params: { user: user_params.except('first_name') }
 
         expect(response).to have_http_status(:unprocessable_entity)
