@@ -2,7 +2,7 @@ class Rental < ApplicationRecord
   scope :borrowed, -> { where(returned: false) }
 
   validates :book_id, :user_id, :borrow_date, :return_date, presence: true
-  validate :available_book?, unless: :book_returned?
+  validate :book_borrowed_error, unless: :book_available?
   validate :return_date_cannot_be_in_the_past, if: -> { return_date.present? }
 
   after_create :disable_book
@@ -11,12 +11,16 @@ class Rental < ApplicationRecord
   belongs_to :book
   belongs_to :user
 
-  def available_book?
+  def book_available?
     book = Book.find_by(id: book_id)
 
-    if !book.available
-      errors.add(:book_id, 'Sorry, this book was already borrowed.')
-    end
+    return false if book.nil?
+
+    book.available
+  end
+
+  def book_borrowed_error
+    errors.add(:book_id, 'Sorry, this book was already borrowed.')
   end
 
   def return_date_cannot_be_in_the_past
