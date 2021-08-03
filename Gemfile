@@ -18,6 +18,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rexml', '~> 3.2', '>= 3.2.4'
+  gem 'factory_bot'
 end
 
 group :development do
@@ -31,6 +32,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'simplecov', require: false
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
