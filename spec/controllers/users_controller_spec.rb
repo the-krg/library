@@ -35,18 +35,18 @@ describe UsersController, type: :controller do
     let(:user_params) { build(:user).attributes }
 
     context 'with valid user params' do
-      it 'renders created status' do
+      it 'redirects to user' do
         post :create, params: { user: user_params }
 
-        expect(response).to have_http_status(:created)
+        expect(response).to redirect_to(user_path(assigns(:user).id))
       end
     end
 
     context 'with invalid user params' do
-      it 'renders unprocessable_entity status' do
+      it 'renders back new template' do
         post :create, params: { user: user_params.except('first_name') }
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -63,7 +63,7 @@ describe UsersController, type: :controller do
       it 'renders ok status' do
         post :update, params: { id: user.id, user: new_user_params }
 
-        expect(response).to have_http_status(:ok)
+        expect(response).to redirect_to(user_path(assigns(:user).id))
       end
     end
 
@@ -73,10 +73,10 @@ describe UsersController, type: :controller do
         user.attributes
       end
 
-      it 'renders unprocessable_entity status' do
+      it 'renders back edit template' do
         post :update, params: { id: user.id, user: new_user_params }
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to render_template(:edit)
       end
     end
   end
@@ -84,10 +84,10 @@ describe UsersController, type: :controller do
   describe '#destroy' do
     let(:user) { create(:user) }
     
-    it 'renders ok status' do
+    it 'redirects to users page' do
       post :destroy, params: { id: user.id }
 
-      expect(response).to have_http_status(:ok)
+      expect(response).to redirect_to(users_url)
     end
   end
 end

@@ -35,19 +35,18 @@ describe BooksController, type: :controller do
     let(:book_params) { build(:book).attributes }
 
     context 'with valid book params' do
-
-      it 'renders created status' do
+      it 'redirects to book page' do
         post :create, params: { book: book_params }
 
-        expect(response).to have_http_status(:created)
+        expect(response).to redirect_to(book_path(assigns(:book).id))
       end
     end
 
     context 'with invalid book params' do
-      it 'renders unprocessable_entity status' do
+      it 'renders back new template' do
         post :create, params: { book: book_params.except('name') }
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to render_template(:new)
       end
     end
   end
@@ -61,10 +60,10 @@ describe BooksController, type: :controller do
         book.attributes
       end
 
-      it 'renders ok status' do
+      it 'redirects to book page' do
         post :update, params: { id: book.id, book: new_book_params }
-
-        expect(response).to have_http_status(:ok)
+      
+        expect(response).to redirect_to(book_path(assigns(:book).id))
       end
     end
 
@@ -74,10 +73,10 @@ describe BooksController, type: :controller do
         book.attributes
       end
 
-      it 'renders unprocessable_entity status' do
+      it 'renders edit page' do
         post :update, params: { id: book.id, book: new_book_params }
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to render_template(:edit)
       end
     end
   end
@@ -86,20 +85,20 @@ describe BooksController, type: :controller do
     let(:book) { create(:book) }
 
     context 'when book not rented' do
-      it 'renders ok status' do
+      it 'redirects to books page' do
         post :destroy, params: { id: book.id }
 
-        expect(response).to have_http_status(:ok)
+        expect(response).to redirect_to(books_path)
       end
     end
 
     context 'when book is rented' do
       before { rental = create(:rental, book: book) }
 
-      it 'renders unprocessable_entity status' do
+      it 'redirects to book' do
         post :destroy, params: { id: book.id }
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to redirect_to(book_path(assigns(:book).id))
       end
     end
   end

@@ -28,10 +28,10 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, status: :created, notice: "Book was successfully created." }
+        format.html { redirect_to @book, notice: "Book was successfully created." }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -40,10 +40,10 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, status: :ok, notice: "Book was successfully updated." }
+        format.html { redirect_to @book, notice: "Book was successfully updated." }
         format.json { render :show, status: :ok, location: @book }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end
@@ -52,10 +52,10 @@ class BooksController < ApplicationController
   def destroy
     respond_to do |format|
       if @book.destroy
-        format.html { redirect_to books_url, status: :ok, notice: "Book was successfully destroyed." }
+        format.html { redirect_to books_url, notice: "Book was successfully destroyed." }
         format.json { head :no_content }
       else
-        format.html { redirect_to @book, status: :unprocessable_entity, notice: @book.errors.full_messages }
+        format.html { redirect_to @book, notice: @book.errors.full_messages }
         format.json { render json: @book.errors, status: :unprocessable_entity }
       end
     end

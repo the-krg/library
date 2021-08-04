@@ -28,28 +28,37 @@ describe RentalsController, type: :controller do
     let(:rental_params) { build(:rental).attributes }
 
     context 'with valid rental params' do
-      it 'renders created status' do
+      it 'redirects to rental' do
         post :create, params: { rental: rental_params }
 
-        expect(response).to have_http_status(:created)
+        expect(response).to redirect_to(rental_path(assigns(:rental).id))
       end
     end
 
     context 'with missing params' do
-      it 'renders unprocessable_entity status' do
-        post :create, params: { rental: rental_params.except('return_date') }
+      before { post :create, params: { rental: rental_params.except('return_date') } }
 
+      it 'renders unprocessable_entity status' do
         expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'renders new rental page' do
+        expect(response).to render_template(:new)
       end
     end
 
     context 'with return date in the past' do
-      before { rental_params['return_date'] = Date.today - 3.days }
+      before do
+        rental_params['return_date'] = Date.today - 3.days
+        post :create, params: { rental: rental_params }
+      end
 
       it 'renders unprocessable_entity status' do
-        post :create, params: { rental: rental_params }
-
         expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'renders new rental page' do
+        expect(response).to render_template(:new)
       end
     end
   end
