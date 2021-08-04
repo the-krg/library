@@ -19,16 +19,6 @@ class Rental < ApplicationRecord
     book.available
   end
 
-  def book_borrowed_error
-    errors.add(:book_id, 'Sorry, this book was already borrowed.')
-  end
-
-  def return_date_cannot_be_in_the_past
-    if return_date < Date.today
-      errors.add(:return_date, 'cannot be in the past.')
-    end
-  end
-
   def disable_book
     Book.find(book_id).update_column(:available, false)
   end
@@ -39,5 +29,17 @@ class Rental < ApplicationRecord
 
   def book_returned?
     returned
+  end
+
+  private
+
+  def book_borrowed_error
+    errors.add(:book_id, 'Sorry, this book was already borrowed.')
+  end
+
+  def return_date_cannot_be_in_the_past
+    if return_date < Date.today
+      errors.add(:return_date, 'cannot be in the past.')
+    end
   end
 end
