@@ -2,7 +2,7 @@ class RentalsController < ApplicationController
   before_action :set_rental, only: %i[ return postpone show ]
 
   def index
-    @rentals = Rental.all.order(return_date: :desc)
+    @rentals = Rental.includes(:user, :book).all.order(return_date: :desc)
   end
 
   def show
