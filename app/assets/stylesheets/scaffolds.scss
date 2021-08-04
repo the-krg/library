@@ -119,3 +119,30 @@ table {
 
 label {
   display: block; }
+
+.mobile-buttons {
+  display: none;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 600px) {
+
+  .header__buttons {
+    display: none;
+  }
+
+  .mobile-buttons {
+    display: block;
+    margin: 0.5rem;
+    text-align: center;
+
+    & > a {
+      display: inline-block;
+      width: 22vw;
+      border: 1px solid black;
+    }
+  }
+}

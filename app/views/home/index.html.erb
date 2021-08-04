@@ -1,34 +1,35 @@
 <h1>Hello there, <br/> <br/> welcome to the Old Library!</h1>
 <h3><%= link_to 'Rent new book', new_rental_path %></h3>
 <br/>
-<table>
-  <caption>
-    <h2>Current Borrowed Books:</h2>
-  </caption>
-  <thead>
-    <tr>
-      <th>Book Name</th>
-      <th>Borrowed By</th>
-      <th>Borrow Date</th>
-      <th>Return Date</th>
-      <th>Days Remaining</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% rentals.each do |rental| %>
-      <tr data-rental-id=<%= rental.id %> class=<%= rental_status(rental.return_date) %>>
-        <td><%= link_to rental.book.name, book_path(rental.book.id) %></td>
-        <td><%= link_to rental.user.first_name, user_path(rental.user.id) %></td>
-        <td><%= rental.borrow_date %></td>
-        <td><%= rental.return_date %></td>
-        <td><%= days_remaining(rental.return_date) %></td>
-        <td><%= link_to 'Show', rental %></td>
-        <td><%= link_to 'Return', return_rental_path(rental), remote: true, method: :post, data: { confirm: 'Are you sure?', id: rental.id } %></td>
+<div class="table-wrapper">
+  <table>
+    <caption>
+      <h2>Current Borrowed Books:</h2>
+    </caption>
+    <thead>
+      <tr>
+        <th>Book Name</th>
+        <th>Borrowed By</th>
+        <th>Borrow Date</th>
+        <th>Return Date</th>
+        <th>Days Remaining</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% rentals.each do |rental| %>
+        <tr data-rental-id=<%= rental.id %> class=<%= rental_status(rental.return_date) %>>
+          <td><%= link_to rental.book.name, book_path(rental.book.id) %></td>
+          <td><%= link_to rental.user.first_name, user_path(rental.user.id) %></td>
+          <td><%= rental.borrow_date %></td>
+          <td><%= rental.return_date %></td>
+          <td><%= days_remaining(rental.return_date) %></td>
+          <td><%= link_to 'Show', rental %></td>
+          <td><%= link_to 'Return', return_rental_path(rental), remote: true, method: :post, data: { confirm: 'Are you sure?', id: rental.id } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 <%= javascript_pack_tag 'returnBook' %>

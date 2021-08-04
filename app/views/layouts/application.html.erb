@@ -24,6 +24,12 @@
         </div>
       </div>
     </header>
+    <div class="mobile-buttons">
+      <%= link_to 'Home', root_path %>
+      <%= link_to 'Books', books_path %>
+      <%= link_to 'Users', users_path %>
+      <%= link_to 'Borrowings', rentals_path %>
+    </div>
     <section>
       <%= yield %>
     </section>

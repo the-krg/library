@@ -3,26 +3,28 @@
 <h1>Rentals</h1>
 <h4><%= link_to 'New Rental', new_rental_path %></h4>
 
-<table>
-  <thead>
-    <tr>
-      <th>Book</th>
-      <th>User</th>
-      <th>Borrow date</th>
-      <th>Return date</th>
-      <th>Returned</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @rentals.each do |rental| %>
+<div class="table-wrapper">
+  <table>
+    <thead>
       <tr>
-        <td><%= rental.book.name %></td>
-        <td><%= rental.user.first_name %></td>
-        <td><%= rental.borrow_date %></td>
-        <td><%= rental.return_date %></td>
-        <td><%= rental.returned %></td>
+        <th>Book</th>
+        <th>User</th>
+        <th>Borrow date</th>
+        <th>Return date</th>
+        <th>Returned</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @rentals.each do |rental| %>
+        <tr>
+          <td><%= rental.book.name %></td>
+          <td><%= rental.user.first_name %></td>
+          <td><%= rental.borrow_date %></td>
+          <td><%= rental.return_date %></td>
+          <td><%= rental.returned %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
