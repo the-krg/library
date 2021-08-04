@@ -44,7 +44,7 @@ describe RentalsController, type: :controller do
     end
 
     context 'with return date in the past' do
-      before { rental_params['return_date'] = Date.yesterday }
+      before { rental_params['return_date'] = Date.today - 3.days }
 
       it 'renders unprocessable_entity status' do
         post :create, params: { rental: rental_params }

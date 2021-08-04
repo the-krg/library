@@ -10,7 +10,7 @@ FactoryBot.define do
       to_create { |instance| instance.save(validate: false) }
 
       borrow_date { Date.today - 3.days }
-      return_date { Date.yesterday }
+      return_date { Date.today - 1.day }
     end
   end
 end
