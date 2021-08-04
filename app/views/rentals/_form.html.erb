@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :book_id %>
-    <%= form.select :book_id, books.collect { |book| [book.name, book.id] }, selected: params[:book_id] %>
+    <%= form.select :book_id, books.collect { |book| [book.name, book.id] }, selected: params[:book_id] || rental.book_id %>
   </div>
 
   <div class="field">
